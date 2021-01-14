@@ -62,7 +62,7 @@ public class ItemMemory implements ItemRepository, InitializingBean {
 	
 	private void initData() {
 		itemsById.put("MLA1", ItemsFactory.createItem("MLA1", 100));
-		itemsById.put("MLA1", ItemsFactory.createItem("MLA2", 210));
+		itemsById.put("MLA2", ItemsFactory.createItem("MLA2", 210));
 		itemsById.put("MLA3", ItemsFactory.createItem("MLA3", 260));
 		itemsById.put("MLA4", ItemsFactory.createItem("MLA4", 80));
 		itemsById.put("MLA5", ItemsFactory.createItem("MLA5", 90));
