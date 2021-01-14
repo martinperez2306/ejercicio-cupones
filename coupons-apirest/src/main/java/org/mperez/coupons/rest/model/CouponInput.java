@@ -14,19 +14,19 @@ import io.swagger.annotations.ApiModelProperty;
  * Coupon
  */
 @Validated
-public class Coupon   {
+public class CouponInput   {
   @JsonProperty("item_ids")
   private List<String> itemIds = null;
 
   @JsonProperty("amount")
-  private Integer amount = null;
+  private Float amount = null;
 
-  public Coupon itemIds(List<String> itemIds) {
+  public CouponInput itemIds(List<String> itemIds) {
     this.itemIds = itemIds;
     return this;
   }
 
-  public Coupon addItemIdsItem(String itemIdsItem) {
+  public CouponInput addItemIdsItem(String itemIdsItem) {
     if (this.itemIds == null) {
       this.itemIds = new ArrayList<String>();
     }
@@ -48,7 +48,7 @@ public class Coupon   {
     this.itemIds = itemIds;
   }
 
-  public Coupon amount(Integer amount) {
+  public CouponInput amount(Float amount) {
     this.amount = amount;
     return this;
   }
@@ -59,11 +59,11 @@ public class Coupon   {
   **/
   @ApiModelProperty(value = "")
   
-    public Integer getAmount() {
+    public Float getAmount() {
     return amount;
   }
 
-  public void setAmount(Integer amount) {
+  public void setAmount(Float amount) {
     this.amount = amount;
   }
 
@@ -76,7 +76,7 @@ public class Coupon   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Coupon coupon = (Coupon) o;
+    CouponInput coupon = (CouponInput) o;
     return Objects.equals(this.itemIds, coupon.itemIds) &&
         Objects.equals(this.amount, coupon.amount);
   }

@@ -19,7 +19,7 @@ public class CouponResponse   {
   private List<String> itemIds = null;
 
   @JsonProperty("total")
-  private Integer total = null;
+  private Float total = null;
 
   public CouponResponse itemIds(List<String> itemIds) {
     this.itemIds = itemIds;
@@ -48,7 +48,7 @@ public class CouponResponse   {
     this.itemIds = itemIds;
   }
 
-  public CouponResponse total(Integer total) {
+  public CouponResponse total(Float total) {
     this.total = total;
     return this;
   }
@@ -59,11 +59,11 @@ public class CouponResponse   {
   **/
   @ApiModelProperty(value = "")
   
-    public Integer getTotal() {
+    public Float getTotal() {
     return total;
   }
 
-  public void setTotal(Integer total) {
+  public void setTotal(Float total) {
     this.total = total;
   }
 

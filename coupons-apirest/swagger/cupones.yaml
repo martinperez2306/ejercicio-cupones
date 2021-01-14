@@ -57,7 +57,8 @@ components:
           items: 
             type: string
         amount:
-          type: integer
+          type: number
+          format: float
     Response:
       type: object
       properties:
@@ -74,4 +75,5 @@ components:
           items: 
             type: string
         total:
-          type: integer
+          type: number
+          format: float

@@ -6,7 +6,7 @@
 package org.mperez.coupons.rest.api;
 
 
-import org.mperez.coupons.rest.model.Coupon;
+import org.mperez.coupons.rest.model.CouponInput;
 import org.mperez.coupons.rest.model.CouponResponse;
 import org.mperez.coupons.rest.model.Response;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public interface CouponApi {
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    ResponseEntity<CouponResponse> getRecomendedItemsForCoupon(@ApiParam(value = "Cupon disponible. Contiene todos los items favoritos del Usuario y el monto maximo que puede gastar."  )  @RequestBody Coupon body
+    ResponseEntity<CouponResponse> getRecomendedItemsForCoupon(@ApiParam(value = "Cupon disponible. Contiene todos los items favoritos del Usuario y el monto maximo que puede gastar."  )  @RequestBody CouponInput body
 );
 
 }
