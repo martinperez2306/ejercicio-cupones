@@ -34,8 +34,16 @@ public class CouponDefaultService implements CouponService {
 		for (Item item : itemList) {
 			itemMap.put(item.getId(), item.getAmount());
 		}
-		itemsCalculation.calculate(itemMap, coupon.getAmount());
-		return null;
+		List<String> itemsIds = itemsCalculation.calculate(itemMap, coupon.getAmount());
+		CouponResponse response = new CouponResponse();
+		response.setItemIds(itemsIds);
+		Float total = new Float(0);
+		for (String id : itemsIds) {
+			Item item = itemRepository.findById(id);
+			total = total + item.getAmount();
+		}
+		response.setTotal(total);
+		return response;
 	}
 
 }

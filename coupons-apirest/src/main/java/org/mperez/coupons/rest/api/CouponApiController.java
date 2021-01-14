@@ -27,7 +27,7 @@ public class CouponApiController implements CouponApi {
 
 	public ResponseEntity<CouponResponse> getRecomendedItemsForCoupon(
 			@ApiParam(value = "Cupon disponible. Contiene todos los items favoritos del Usuario y el monto maximo que puede gastar.") @RequestBody CouponInput body) {
-		return new ResponseEntity<CouponResponse>(HttpStatus.NOT_IMPLEMENTED);
+		return new ResponseEntity<CouponResponse>(couponService.getItemsForCoupon(body), HttpStatus.OK);
 	}
 
 }
