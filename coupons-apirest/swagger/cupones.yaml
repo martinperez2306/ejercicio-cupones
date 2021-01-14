@@ -1,0 +1,77 @@
+openapi: 3.0.1
+info:
+  title: Swagger API REST CSGO Community
+  description: Swagger de servicios REST que expone Community
+  version: 1.0.0
+servers:
+- url: http://localhost/v1
+tags:
+- name: Cupones
+  description: Servicios para Cupones
+paths:
+  /coupon:
+    post:
+      tags:
+      - Cupones
+      summary: Consulta de Items que puede comprar el Usuario
+      description: Recibe un conjunto de items y el monto maximo del cupon y devuelve los items que el usuario puedee comprar sin superar el limite del cupon.
+      operationId: getRecomendedItemsForCoupon
+      requestBody:
+        description: Cupon disponible. Contiene todos los items favoritos del Usuario y el monto maximo que puede gastar.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Coupon'
+      responses:
+        200:
+          description: Equipo registrado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CouponResponse'
+        400:
+          description: Solicitud invalida. Datos invalidos o incompletos.
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Response'
+        404:
+          description: El monto no sea suficiente como para comprar mínimamente un item.
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Response'
+        500:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+components:
+  schemas:
+    Coupon:
+      type: object
+      properties:
+        item_ids:
+          type: array
+          items: 
+            type: string
+        amount:
+          type: integer
+    Response:
+      type: object
+      properties:
+        status:
+          type: string
+        errors:
+          type: array
+          items: 
+            type: string
+    CouponResponse:
+      properties:
+        item_ids:
+          type: array
+          items: 
+            type: string
+        total:
+          type: integer
