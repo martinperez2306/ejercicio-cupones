@@ -1,6 +1,6 @@
 package org.mperez.coupons.model;
 
-public class Item {
+public class Item implements Comparable<Item>{
 	
 	private String id;
 	private Float amount;
@@ -21,6 +21,22 @@ public class Item {
 	}
 	public void setAmount(Float amount) {
 		this.amount = amount;
+	}
+
+	@Override
+	public int compareTo(Item o) {
+		if(this.amount < o.getAmount())
+			return -1;
+		if(this.amount == o.getAmount())
+			return 0;
+		if(this.amount > o.getAmount())
+			return 1;
+		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", amount=" + amount + "]";
 	}
 
 }
