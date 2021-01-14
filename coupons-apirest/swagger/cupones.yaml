@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: Swagger API REST CSGO Community
-  description: Swagger de servicios REST que expone Community
+  title: Swagger API REST Coupons
+  description: Swagger de servicios REST para servicioss de Cupones
   version: 1.0.0
 servers:
 - url: http://localhost/v1
@@ -21,7 +21,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Coupon'
+              $ref: '#/components/schemas/CouponInput'
       responses:
         200:
           description: Equipo registrado exitosamente
@@ -49,7 +49,7 @@ paths:
                 $ref: '#/components/schemas/Response'
 components:
   schemas:
-    Coupon:
+    CouponInput:
       type: object
       properties:
         item_ids:
