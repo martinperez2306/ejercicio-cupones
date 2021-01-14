@@ -44,6 +44,7 @@ public class MaximizeTotalSpent implements ItemsCalculation {
 		
 		Float maxAmount = itemsByAcumulatedAmount.keySet().stream().map(k -> new Float(k)).reduce((a1, a2) -> a1 > a2 ? a1 : a2).orElse(new Float(0));
 		itemsCalculated = itemsByAcumulatedAmount.get(maxAmount.toString()).stream().map(item -> item.getId()).collect(Collectors.toList());
+		Collections.sort(itemsCalculated);
 		return itemsCalculated;
 	}
 	
