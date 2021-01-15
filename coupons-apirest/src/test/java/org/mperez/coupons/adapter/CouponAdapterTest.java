@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mperez.coupons.factory.CouponsFactory;
 import org.mperez.coupons.model.Coupon;
-import org.mperez.coupons.rest.model.CouponInput;
+import org.mperez.coupons.rest.model.CouponRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
@@ -23,14 +23,14 @@ public class CouponAdapterTest {
 	private CouponAdapter couponAdapter;
 	
 	@Test
-	public void adaptToView() {
-		CouponInput expected = new CouponInput();
+	public void adaptToViewShouldCreateExpectedViewObject() {
+		CouponRequest expected = new CouponRequest();
 		expected.setAmount(new Float(100));
 		expected.setItemIds(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"));
 		
 		Coupon example = CouponsFactory.createCoupon(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"), 100);
 		
-		CouponInput adapted = couponAdapter.adaptToView(example);
+		CouponRequest adapted = couponAdapter.adaptToView(example);
 		
 		assertTrue(expected.getAmount().equals(adapted.getAmount()));
 		assertTrue(expected.getItemIds().get(0).equals(adapted.getItemIds().get(0)));
@@ -41,10 +41,10 @@ public class CouponAdapterTest {
 	}
 	
 	@Test
-	public void adaptToModel() {
+	public void adaptToModelShouldCreateExpectedModelObject() {
 		Coupon expected = CouponsFactory.createCoupon(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"), 100);
 		
-		CouponInput example = new CouponInput();
+		CouponRequest example = new CouponRequest();
 		example.setAmount(new Float(100));
 		example.setItemIds(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"));
 		
