@@ -13,16 +13,11 @@ public class Item implements Comparable<Item>{
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public Float getAmount() {
 		return amount;
 	}
-	public void setAmount(Float amount) {
-		this.amount = amount;
-	}
-
+	
 	@Override
 	public int compareTo(Item o) {
 		if(this.amount < o.getAmount())

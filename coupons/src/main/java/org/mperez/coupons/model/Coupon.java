@@ -19,5 +19,10 @@ public class Coupon {
 	public Float getAmount() {
 		return amount;
 	}
+
+	@Override
+	public String toString() {
+		return "Coupon [itemIds=" + itemIds + ", amount=" + amount + "]";
+	}
 	
 }
