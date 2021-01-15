@@ -8,7 +8,7 @@ public class ItemsForCoupon {
 	private Float total;
 	private Coupon coupon;
 	
-	public ItemsForCoupon(List<String> itemIds, Float total,Coupon coupon) {
+	public ItemsForCoupon(List<String> itemIds, Float total, Coupon coupon) {
 		this.itemIds = itemIds;
 		this.total = total;
 		this.coupon = coupon;
