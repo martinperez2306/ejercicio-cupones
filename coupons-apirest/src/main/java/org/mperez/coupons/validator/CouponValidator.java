@@ -23,7 +23,7 @@ public class CouponValidator implements Validator<Coupon>{
 			error.setDetail("Coupon is required!");
 			errors.add(error);
 		}else {
-			nextValidator.validate(data);
+			errors.addAll(nextValidator.validate(data));
 		}
 		return errors;
 	}

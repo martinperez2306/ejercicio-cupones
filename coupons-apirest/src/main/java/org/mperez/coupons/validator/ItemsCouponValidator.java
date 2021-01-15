@@ -22,7 +22,7 @@ public class ItemsCouponValidator implements Validator<Coupon>{
 			error.setDetail("Item Ids are required!");
 			errors.add(error);
 		}else {
-			nextValidator.validate(data);
+			errors.addAll(nextValidator.validate(data));
 		}
 		return errors;
 	}
