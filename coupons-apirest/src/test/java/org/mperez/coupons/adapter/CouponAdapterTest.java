@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class CouponAdapterTest {
 	
 	@Autowired
-	private CouponAdapter couponAdapter;
+	private CouponRequestAdapter couponAdapter;
 	
 	@Test
 	public void adaptToViewShouldCreateExpectedViewObject() {

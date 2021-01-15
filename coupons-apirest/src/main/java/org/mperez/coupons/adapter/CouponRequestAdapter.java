@@ -9,7 +9,7 @@ import org.mperez.coupons.rest.model.CouponRequest;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CouponAdapter implements Adapter<CouponRequest, Coupon>{
+public class CouponRequestAdapter implements Adapter<CouponRequest, Coupon>{
 
 	@Override
 	public Coupon adaptToModel(CouponRequest view) {
