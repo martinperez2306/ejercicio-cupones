@@ -32,26 +32,32 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.9.2</version>
 		</dependency>
-		
+
 		<!-- JUNIT -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- CUPONES -->
 		<dependency>
 			<groupId>org.mperez</groupId>
 			<artifactId>coupons</artifactId>
 			<version>0.0.1</version>
 		</dependency>
-		
+
+		<!-- ITEM API -->
+		<dependency>
+			<groupId>org.mperez</groupId>
+			<artifactId>items-api-client</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 </project>
