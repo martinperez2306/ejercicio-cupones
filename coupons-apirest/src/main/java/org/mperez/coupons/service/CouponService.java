@@ -1,10 +1,10 @@
 package org.mperez.coupons.service;
 
-import org.mperez.coupons.rest.model.CouponRequest;
-import org.mperez.coupons.rest.model.CouponResponse;
+import org.mperez.coupons.model.Coupon;
+import org.mperez.coupons.model.ItemsForCoupon;
 
 public interface CouponService {
 	
-	public CouponResponse getItemsForCoupon(CouponRequest couponInput);
+	public ItemsForCoupon getItemsForCoupon(Coupon coupon);
 
 }
