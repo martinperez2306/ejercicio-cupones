@@ -39,18 +39,6 @@ public class ItemMemory implements ItemRepository, InitializingBean {
 	}
 
 	@Override
-	public List<Item> findByMaxAmount(Float maxAmount) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Item> findByMinAmount(Float minAmount) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void save(Item item) {
 		itemsById.put(item.getId(), item);
 	}

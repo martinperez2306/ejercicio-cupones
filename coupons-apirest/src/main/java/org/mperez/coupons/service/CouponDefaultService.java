@@ -12,7 +12,7 @@ import org.mperez.coupons.exception.NotFoundException;
 import org.mperez.coupons.model.Coupon;
 import org.mperez.coupons.model.Item;
 import org.mperez.coupons.reposirory.ItemRepository;
-import org.mperez.coupons.rest.model.CouponInput;
+import org.mperez.coupons.rest.model.CouponRequest;
 import org.mperez.coupons.rest.model.CouponResponse;
 import org.mperez.coupons.validator.ValidationError;
 import org.mperez.coupons.validator.Validator;
@@ -35,7 +35,7 @@ public class CouponDefaultService implements CouponService {
 	private Validator<Coupon> couponValidator;
 
 	@Override
-	public CouponResponse getItemsForCoupon(CouponInput couponInput) {
+	public CouponResponse getItemsForCoupon(CouponRequest couponInput) {
 		Coupon coupon = couponAdapter.adaptToModel(couponInput);
 		List<ValidationError> errors = couponValidator.validate(coupon);
 		if(!errors.isEmpty()) {

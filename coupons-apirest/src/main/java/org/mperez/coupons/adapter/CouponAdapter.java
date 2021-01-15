@@ -5,29 +5,29 @@ import java.util.stream.Collectors;
 
 import org.mperez.coupons.factory.CouponsFactory;
 import org.mperez.coupons.model.Coupon;
-import org.mperez.coupons.rest.model.CouponInput;
+import org.mperez.coupons.rest.model.CouponRequest;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CouponAdapter implements Adapter<CouponInput, Coupon>{
+public class CouponAdapter implements Adapter<CouponRequest, Coupon>{
 
 	@Override
-	public Coupon adaptToModel(CouponInput view) {
+	public Coupon adaptToModel(CouponRequest view) {
 		return CouponsFactory.createCoupon(view.getItemIds(), view.getAmount());
 	}
 
 	@Override
-	public CouponInput adaptToView(Coupon model) {
-		return new CouponInput().itemIds(model.getItemIds()).amount(model.getAmount());
+	public CouponRequest adaptToView(Coupon model) {
+		return new CouponRequest().itemIds(model.getItemIds()).amount(model.getAmount());
 	}
 
 	@Override
-	public List<Coupon> adaptToModel(List<CouponInput> views) {
+	public List<Coupon> adaptToModel(List<CouponRequest> views) {
 		return views.stream().map(v -> adaptToModel(v)).collect(Collectors.toList());
 	}
 
 	@Override
-	public List<CouponInput> adaptToView(List<Coupon> models) {
+	public List<CouponRequest> adaptToView(List<Coupon> models) {
 		return models.stream().map(m -> adaptToView(m)).collect(Collectors.toList());
 	}
 

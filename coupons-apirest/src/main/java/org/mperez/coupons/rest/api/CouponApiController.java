@@ -1,6 +1,6 @@
 package org.mperez.coupons.rest.api;
 
-import org.mperez.coupons.rest.model.CouponInput;
+import org.mperez.coupons.rest.model.CouponRequest;
 import org.mperez.coupons.rest.model.CouponResponse;
 import org.mperez.coupons.service.CouponService;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ public class CouponApiController implements CouponApi {
 	}
 
 	public ResponseEntity<CouponResponse> getRecomendedItemsForCoupon(
-			@ApiParam(value = "Cupon disponible. Contiene todos los items favoritos del Usuario y el monto maximo que puede gastar.") @RequestBody CouponInput body) {
+			@ApiParam(value = "Cupon disponible. Contiene todos los items favoritos del Usuario y el monto maximo que puede gastar.") @RequestBody CouponRequest body) {
 		return new ResponseEntity<CouponResponse>(couponService.getItemsForCoupon(body), HttpStatus.OK);
 	}
 

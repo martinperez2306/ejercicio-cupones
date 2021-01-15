@@ -21,7 +21,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CouponInput'
+              $ref: '#/components/schemas/CouponRequest'
       responses:
         200:
           description: Equipo registrado exitosamente
@@ -49,7 +49,7 @@ paths:
                 $ref: '#/components/schemas/Response'
 components:
   schemas:
-    CouponInput:
+    CouponRequest:
       type: object
       properties:
         item_ids:

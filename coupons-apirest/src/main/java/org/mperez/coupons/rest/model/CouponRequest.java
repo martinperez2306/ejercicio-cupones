@@ -11,22 +11,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * CouponInput
+ * CouponRequest
  */
 @Validated
-public class CouponInput   {
+public class CouponRequest   {
   @JsonProperty("item_ids")
   private List<String> itemIds = null;
 
   @JsonProperty("amount")
   private Float amount = null;
 
-  public CouponInput itemIds(List<String> itemIds) {
+  public CouponRequest itemIds(List<String> itemIds) {
     this.itemIds = itemIds;
     return this;
   }
 
-  public CouponInput addItemIdsItem(String itemIdsItem) {
+  public CouponRequest addItemIdsItem(String itemIdsItem) {
     if (this.itemIds == null) {
       this.itemIds = new ArrayList<String>();
     }
@@ -48,7 +48,7 @@ public class CouponInput   {
     this.itemIds = itemIds;
   }
 
-  public CouponInput amount(Float amount) {
+  public CouponRequest amount(Float amount) {
     this.amount = amount;
     return this;
   }
@@ -76,9 +76,9 @@ public class CouponInput   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CouponInput couponInput = (CouponInput) o;
-    return Objects.equals(this.itemIds, couponInput.itemIds) &&
-        Objects.equals(this.amount, couponInput.amount);
+    CouponRequest couponRequest = (CouponRequest) o;
+    return Objects.equals(this.itemIds, couponRequest.itemIds) &&
+        Objects.equals(this.amount, couponRequest.amount);
   }
 
   @Override
@@ -89,7 +89,7 @@ public class CouponInput   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CouponInput {\n");
+    sb.append("class CouponRequest {\n");
     
     sb.append("    itemIds: ").append(toIndentedString(itemIds)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
