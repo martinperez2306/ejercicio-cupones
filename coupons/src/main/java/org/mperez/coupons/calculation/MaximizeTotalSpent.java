@@ -9,12 +9,13 @@ import java.util.stream.Collectors;
 
 import org.mperez.coupons.factory.ItemsFactory;
 import org.mperez.coupons.model.Item;
+import org.mperez.coupons.utils.ItemUtils;
 
 public class MaximizeTotalSpent implements ItemsCalculation {
 
 	public List<String> calculate(Map<String, Float> items, Float amount) {
 		List<String> itemsCalculated = new ArrayList<String>();
-		List<Item> itemsToCalculate = getItemsWithPriceLowerThanAmount(items, amount);
+		List<Item> itemsToCalculate = ItemUtils.getItemsWithPriceLowerThanAmount(items, amount);
 		
 		Map<String, List<Item>> itemsByAcumulatedAmount = new HashMap<String, List<Item>>();
 		itemsByAcumulatedAmount.put("0.0", new ArrayList<Item>());
@@ -48,23 +49,4 @@ public class MaximizeTotalSpent implements ItemsCalculation {
 		return itemsCalculated;
 	}
 	
-	public Boolean enableToAddItems(List<Item> oldItemsToCalculate, List<Item> newItemsToCalculate) {
-		return newItemsToCalculate.size() < oldItemsToCalculate.size(); 
-	}
-	
-	private Item getItemWithMaxPrice(List<Item> items) {
-		return items.stream().reduce((item1,item2) -> item1.getAmount() >= item2.getAmount() ? item1 : item2).get();
-	}
-	
-	
-	private List<Item> getItemsWithPriceLowerThanAmount(Map<String, Float> items, Float amount){
-		List<Item> itemList = new ArrayList<Item>();
-		items.forEach((i,a) -> itemList.add(ItemsFactory.createItem(i, a)));
-		return itemList.stream().filter(item -> itemPriceIsLessThanAmount(item, amount)).collect(Collectors.toList());
-	}
-	
-	private Boolean itemPriceIsLessThanAmount(Item item, Float amount) {
-		return item.getAmount() <= amount;
-	}
-
 }
