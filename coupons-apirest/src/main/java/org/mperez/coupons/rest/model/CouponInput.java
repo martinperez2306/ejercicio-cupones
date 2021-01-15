@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Coupon
+ * CouponInput
  */
 @Validated
 public class CouponInput   {
@@ -76,9 +76,9 @@ public class CouponInput   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CouponInput coupon = (CouponInput) o;
-    return Objects.equals(this.itemIds, coupon.itemIds) &&
-        Objects.equals(this.amount, coupon.amount);
+    CouponInput couponInput = (CouponInput) o;
+    return Objects.equals(this.itemIds, couponInput.itemIds) &&
+        Objects.equals(this.amount, couponInput.amount);
   }
 
   @Override
@@ -89,7 +89,7 @@ public class CouponInput   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Coupon {\n");
+    sb.append("class CouponInput {\n");
     
     sb.append("    itemIds: ").append(toIndentedString(itemIds)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");

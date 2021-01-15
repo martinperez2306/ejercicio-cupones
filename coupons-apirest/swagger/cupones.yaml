@@ -9,7 +9,7 @@ tags:
 - name: Cupones
   description: Servicios para Cupones
 paths:
-  /coupon:
+  /coupon/:
     post:
       tags:
       - Cupones

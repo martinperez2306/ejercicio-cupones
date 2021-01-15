@@ -5,7 +5,6 @@
  */
 package org.mperez.coupons.rest.api;
 
-
 import org.mperez.coupons.rest.model.CouponInput;
 import org.mperez.coupons.rest.model.CouponResponse;
 import org.mperez.coupons.rest.model.Response;
@@ -28,7 +27,7 @@ public interface CouponApi {
         @ApiResponse(code = 400, message = "Solicitud invalida. Datos invalidos o incompletos.", response = Response.class),
         @ApiResponse(code = 404, message = "El monto no sea suficiente como para comprar mínimamente un item.", response = Response.class),
         @ApiResponse(code = 500, message = "Error interno del servidor", response = Response.class) })
-    @RequestMapping(value = "/coupon",
+    @RequestMapping(value = "/coupon/",
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.POST)
