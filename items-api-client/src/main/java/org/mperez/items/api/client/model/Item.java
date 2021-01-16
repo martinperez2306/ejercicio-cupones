@@ -3,13 +3,12 @@ package org.mperez.items.api.client.model;
 public class Item {
 	
 	private String id;
+	
 	private String title;
+	
 	private Float price;
+	
 	private String site_id;
-
-	public Item() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public String getId() {
 		return id;
