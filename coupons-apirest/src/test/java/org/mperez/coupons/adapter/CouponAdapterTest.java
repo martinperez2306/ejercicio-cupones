@@ -169,13 +169,13 @@ public class CouponAdapterTest {
 		Coupon coupon1 = CouponsFactory.createCoupon(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"), 500);
 		Coupon coupon2 = CouponsFactory.createCoupon(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"), 1000);
 		ItemsForCoupon example1 = new ItemsForCoupon(Arrays.asList("MLA1","MLA2","MLA4","MLA5"), new Float(480), coupon1);
-		ItemsForCoupon example2 = new ItemsForCoupon(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"), new Float(720), coupon2);
+		ItemsForCoupon example2 = new ItemsForCoupon(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"), new Float(740), coupon2);
 		
 		CouponResponse expected1 = new CouponResponse();
 		expected1.setTotal(new Float(480));
 		expected1.setItemIds(Arrays.asList("MLA1","MLA2","MLA4","MLA5"));
 		CouponResponse expected2 = new CouponResponse();
-		expected2.setTotal(new Float(720));
+		expected2.setTotal(new Float(740));
 		expected2.setItemIds(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"));
 		
 		List<ItemsForCoupon> items = new ArrayList<ItemsForCoupon>();
@@ -196,7 +196,7 @@ public class CouponAdapterTest {
 		example1.setTotal(new Float(100));
 		example1.setItemIds(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"));
 		CouponResponse example2 = new CouponResponse();
-		example2.setTotal(new Float(720));
+		example2.setTotal(new Float(740));
 		example2.setItemIds(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"));
 		
 		List<CouponResponse> responses = new ArrayList<CouponResponse>();
@@ -204,7 +204,7 @@ public class CouponAdapterTest {
 		responses.add(example2);
 		
 		ItemsForCoupon expected1 = new ItemsForCoupon(Arrays.asList("MLA1","MLA2","MLA4","MLA5"), new Float(480), coupon1);
-		ItemsForCoupon expected2 = new ItemsForCoupon(Arrays.asList("MLA1","MLA2", "MLA3","MLA4","MLA5"), new Float(720), coupon2);
+		ItemsForCoupon expected2 = new ItemsForCoupon(Arrays.asList("MLA1","MLA2", "MLA3","MLA4","MLA5"), new Float(740), coupon2);
 		
 		List<ItemsForCoupon> items = couponResponseAdapter.adaptToModel(responses);
 		compareItemsForCoupons(expected1, items.get(0));

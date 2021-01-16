@@ -18,14 +18,6 @@ public class ItemApi {
 	
 	private final static String itemPath = "/items";
 
-	public ItemApi() {
-		this.restTemplate = new RestTemplate();
-	    MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-	    converter.setSupportedMediaTypes(Arrays.asList(MediaType.TEXT_HTML,  MediaType.APPLICATION_JSON));
-	    restTemplate.getMessageConverters().add(converter);
-		this.baseUrl = "/";
-	}
-	
 	public ItemApi(String baseUrl) {
 		this.restTemplate = new RestTemplate();
 		RestTemplate restTemplate = new RestTemplate();
