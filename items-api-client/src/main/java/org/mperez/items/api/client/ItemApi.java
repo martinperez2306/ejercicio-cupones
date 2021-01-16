@@ -36,12 +36,12 @@ public class ItemApi {
 		this.baseUrl = baseUrl;
 	}
 	
-	public Item getById(String id) throws URISyntaxException {
+	public Item getById(String id) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.TEXT_HTML);
 		URI uri = new URI(baseUrl + itemPath + "/" + id);
 		ResponseEntity<Item> response = restTemplate.getForEntity(uri, Item.class);
 		return response.getBody();
 	}
-
+	
 }
