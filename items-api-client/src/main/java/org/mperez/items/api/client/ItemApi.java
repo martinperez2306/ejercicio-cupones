@@ -1,7 +1,6 @@
 package org.mperez.items.api.client;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 
 import org.mperez.items.api.client.model.Item;
