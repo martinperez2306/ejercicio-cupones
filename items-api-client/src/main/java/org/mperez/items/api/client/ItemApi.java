@@ -16,8 +16,6 @@ public class ItemApi {
 	
 	private String baseUrl;
 	
-	private final static String itemPath = "/items";
-
 	public ItemApi(String baseUrl) {
 		this.restTemplate = new RestTemplate();
 		RestTemplate restTemplate = new RestTemplate();
@@ -30,7 +28,7 @@ public class ItemApi {
 	public Item getById(String id) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.TEXT_HTML);
-		URI uri = new URI(baseUrl + itemPath + "/" + id);
+		URI uri = new URI(baseUrl + "/" + id);
 		ResponseEntity<Item> response = restTemplate.getForEntity(uri, Item.class);
 		return response.getBody();
 	}

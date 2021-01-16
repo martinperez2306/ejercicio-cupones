@@ -1,5 +1,6 @@
 package org.mperez.coupons.reposirory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mperez.coupons.adapter.ItemAdapter;
@@ -36,7 +37,13 @@ public class ItemHttpClient implements ItemRepository{
 
 	@Override
 	public List<Item> findByIds(List<String> itemIds) {
-		throw new UnsupportedOperationException();
+		List<Item> items = new ArrayList<Item>();
+		for (String id : itemIds) {
+			Item item = findById(id);
+			if(item != null)
+				items.add(item);
+		}
+		return items;
 	}
 
 	@Override
