@@ -6,6 +6,9 @@ import java.util.Arrays;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mperez.coupons.exception.BadRequestException;
+import org.mperez.coupons.exception.NotFoundException;
+import org.mperez.coupons.exception.PreconditionFailedException;
 import org.mperez.coupons.factory.CouponsFactory;
 import org.mperez.coupons.model.Coupon;
 import org.mperez.coupons.model.ItemsForCoupon;
@@ -30,6 +33,24 @@ public class CouponServiceTest {
 		ItemsForCoupon obtained = couponService.getItemsForCoupon(coupon);
 		assertTrue(expected.getTotal().equals(obtained.getTotal()));
 		assertTrue(expected.getItemIds().size() == obtained.getItemIds().size());
+	}
+	
+	@Test(expected = BadRequestException.class)
+	public void getItemsForInvalidCouponShouldThrowBadRequestException() {
+		Coupon coupon = CouponsFactory.createCoupon(Arrays.asList(), 0);
+		couponService.getItemsForCoupon(coupon);
+	}
+	
+	@Test(expected = PreconditionFailedException.class)
+	public void getItemsForCouponWithInexistingItemsShouldThrowPreConditionFailedException() {
+		Coupon coupon = CouponsFactory.createCoupon(Arrays.asList("MLANOEXISTE1,MLANOEXISTE2,MLANOEXISTE3"), 5000);
+		couponService.getItemsForCoupon(coupon);
+	}
+	
+	@Test(expected = NotFoundException.class)
+	public void getItemsForCouponWithInsufficientAmountShouldThrowNotFoundException() {
+		Coupon coupon = CouponsFactory.createCoupon(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"), 30);
+		couponService.getItemsForCoupon(coupon);
 	}
 
 }

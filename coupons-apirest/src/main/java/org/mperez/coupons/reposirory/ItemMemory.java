@@ -31,7 +31,7 @@ public class ItemMemory implements ItemRepository, InitializingBean {
 	public List<Item> findByIds(List<String> itemIds) {
 		List<Item> items = new ArrayList<Item>();
 		for (String id : itemIds) {
-			if(itemIds.contains(id)) {
+			if(itemsById.containsKey(id)) {
 				items.add(itemsById.get(id));
 			}
 		}
