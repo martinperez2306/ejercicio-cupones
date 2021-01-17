@@ -8,7 +8,7 @@ import java.util.Map;
  * cierto monto maximizando el total gastado entre todos los items sin superar
  * el monto del cupon.
  * 
- * @author mperez
+ * @author Martin Nicolas Perez
  *
  */
 public interface ItemsCalculation {

@@ -4,7 +4,9 @@ import java.util.List;
 
 /**
  * Adaptador de objetos de la Vista y el Modelo
+ * 
  * Adapta un objeto de la vista al modelo y viceversa.
+ * 
  * V: Objeto de la vista
  * M: Objeto de Modelo
  * @author Martin Nicolas Perez
