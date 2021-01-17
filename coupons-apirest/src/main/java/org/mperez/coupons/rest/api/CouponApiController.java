@@ -27,7 +27,7 @@ public class CouponApiController implements CouponApi {
 	@Autowired
 	private CouponService couponService;
 
-	private static final Logger log = LoggerFactory.getLogger(CouponApiController.class);
+	private static final Logger logger = LoggerFactory.getLogger(CouponApiController.class);
 
 	public CouponApiController() {
 		
@@ -35,7 +35,7 @@ public class CouponApiController implements CouponApi {
 
 	public ResponseEntity<CouponResponse> getRecomendedItemsForCoupon(
 			@ApiParam(value = "Cupon disponible. Contiene todos los items favoritos del Usuario y el monto maximo que puede gastar.") @RequestBody CouponRequest body) {
-		log.info("Atendiendo pedido Obtener Items recomendados para Cupon");
+		logger.info("Atendiendo pedido Obtener Items recomendados para Cupon");
 		ItemsForCoupon itemsForCoupon = couponService.getItemsForCoupon(couponRequestAdapter.adaptToModel(body));
 		return ResponseEntity.ok(couponResponseAdapter.adaptToView(itemsForCoupon));
 	}
