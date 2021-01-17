@@ -1,10 +1,12 @@
 package org.mperez.coupons.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.mperez.coupons.cache.Cache;
 import org.mperez.coupons.calculation.ItemsCalculation;
 import org.mperez.coupons.exception.BadRequestException;
 import org.mperez.coupons.exception.NotFoundException;
@@ -29,6 +31,9 @@ public class CouponDefaultService implements CouponService {
 	
 	@Autowired
 	private Validator<Coupon> couponValidator;
+	
+	@Autowired
+	private Cache<Item> itemCache;
 
 	@Override
 	public ItemsForCoupon getItemsForCoupon(Coupon coupon) {
@@ -40,13 +45,24 @@ public class CouponDefaultService implements CouponService {
 		return createItemsForCoupon(itemIds,coupon);
 	}
 	
+	private List<Item> retrieveItems(Coupon coupon){
+		List<Item> items = new ArrayList<Item>();
+		List<String> itemIdsCached = coupon.getItemIds().stream().filter(id -> itemCache.isPresent(id)).collect(Collectors.toList());
+		List<String> itemIdsNotCached = coupon.getItemIds().stream().filter(id -> !itemCache.isPresent(id)).collect(Collectors.toList());
+		itemIdsCached.forEach(id -> items.add(itemCache.get(id)));
+		List<Item> itemsFromApi = itemRepository.findByIds(itemIdsNotCached);
+		itemsFromApi.forEach(item -> itemCache.save(item));
+		items.addAll(itemsFromApi);
+		return items;
+	}
+	
 	private Boolean someItemWasNotFound(List<Item> itemsObtained, Coupon coupon) {
 		return (coupon.getItemIds().size() > itemsObtained.size());
 	}
 	
 	private Map<String, Float> createItemMapFromCoupon(Coupon coupon) {
 		Map<String, Float> itemMap = new HashMap<String, Float>();
-		List<Item> itemList = itemRepository.findByIds(coupon.getItemIds());
+		List<Item> itemList = retrieveItems(coupon);
 		if(someItemWasNotFound(itemList, coupon))
 			throw new PreconditionFailedException("No se ha podido recuperar uno o mas Items del Cupon");
 		for (Item item : itemList) {
