@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.mperez.coupons.calculation.ItemsCalculation;
 import org.mperez.coupons.exception.BadRequestException;
 import org.mperez.coupons.exception.NotFoundException;
+import org.mperez.coupons.exception.PreconditionFailedException;
 import org.mperez.coupons.model.Coupon;
 import org.mperez.coupons.model.Item;
 import org.mperez.coupons.model.ItemsForCoupon;
@@ -32,17 +33,22 @@ public class CouponDefaultService implements CouponService {
 	@Override
 	public ItemsForCoupon getItemsForCoupon(Coupon coupon) {
 		List<ValidationError> errors = couponValidator.validate(coupon);
-		if(!errors.isEmpty()) {
+		if(!errors.isEmpty()) 
 			throw new BadRequestException(errors.stream().map(e -> e.getDetail()).collect(Collectors.toList()));
-		}
 		Map<String, Float> itemMap = createItemMapFromCoupon(coupon);
 		List<String> itemIds = itemsCalculation.calculate(itemMap, coupon.getAmount());
 		return createItemsForCoupon(itemIds,coupon);
 	}
 	
-	private Map<String, Float> createItemMapFromCoupon(Coupon coupon){
+	private Boolean someItemWasNotFound(List<Item> itemsObtained, Coupon coupon) {
+		return (coupon.getItemIds().size() > itemsObtained.size());
+	}
+	
+	private Map<String, Float> createItemMapFromCoupon(Coupon coupon) {
 		Map<String, Float> itemMap = new HashMap<String, Float>();
 		List<Item> itemList = itemRepository.findByIds(coupon.getItemIds());
+		if(someItemWasNotFound(itemList, coupon))
+			throw new PreconditionFailedException("No se ha podido recuperar uno o mas Items del Cupon");
 		for (Item item : itemList) {
 			itemMap.put(item.getId(), item.getAmount());
 		}
@@ -51,7 +57,7 @@ public class CouponDefaultService implements CouponService {
 	
 	private ItemsForCoupon createItemsForCoupon(List<String> itemIds, Coupon coupon) {
 		if(itemIds.isEmpty())
-			throw new NotFoundException("El monto no sea suficiente como para comprar minimamente un item");
+			throw new NotFoundException("El monto no es suficiente como para comprar minimamente un item");
 		Float total = new Float(0);
 		for (String id : itemIds) {
 			Item item = itemRepository.findById(id);
