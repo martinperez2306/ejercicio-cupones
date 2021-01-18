@@ -12,14 +12,18 @@ public class ItemAdapter implements Adapter<org.mperez.items.api.client.model.It
 
 	@Override
 	public Item adaptToModel(org.mperez.items.api.client.model.Item view) {
+		if(view == null)
+			return ItemsFactory.createItem("", new Float(0));
 		return  ItemsFactory.createItem(view.getId(),view.getPrice());
 	}
 
 	@Override
 	public org.mperez.items.api.client.model.Item adaptToView(Item model) {
 		org.mperez.items.api.client.model.Item view = new org.mperez.items.api.client.model.Item();
-		view.setId(model.getId());
-		view.setPrice(model.getAmount());
+		if(model != null) {
+			view.setId(model.getId());
+			view.setPrice(model.getAmount());
+		}
 		return view;
 	}
 

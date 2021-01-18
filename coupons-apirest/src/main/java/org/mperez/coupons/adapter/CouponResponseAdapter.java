@@ -18,8 +18,10 @@ public class CouponResponseAdapter implements Adapter<CouponResponse, ItemsForCo
 	@Override
 	public CouponResponse adaptToView(ItemsForCoupon model) {
 		CouponResponse response = new CouponResponse();
-		response.setItemIds(model.getItemIds());
-		response.setTotal(model.getTotal());
+		if(model != null) {
+			response.setItemIds(model.getItemIds());
+			response.setTotal(model.getTotal());
+		}
 		return response;
 	}
 
