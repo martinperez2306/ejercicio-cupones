@@ -2,7 +2,9 @@ package org.mperez.coupons.adapter;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,22 @@ public class ItemAdapterTest {
 	private void compareModels(org.mperez.coupons.model.Item expected, org.mperez.coupons.model.Item obtained) {
 		assertTrue(expected.getId().equals(obtained.getId()));
 		assertTrue(expected.getAmount().equals(obtained.getAmount()));
+	}
+	
+	@Test
+	public void adaptNullShouldCreateViewEmptyObject() {
+		org.mperez.coupons.model.Item model = null;
+		org.mperez.items.api.client.model.Item adapted = itemAdapter.adaptToView(model);
+		assertNull(adapted.getId());
+		assertNull(adapted.getPrice());
+	}
+	
+	@Test
+	public void adaptNullShouldCreateModelEmptyObject() {
+		org.mperez.items.api.client.model.Item model = null;
+		org.mperez.coupons.model.Item adapted = itemAdapter.adaptToModel(model);
+		assertEquals("", adapted.getId());
+		assertEquals(new Float(0), adapted.getAmount());
 	}
 	
 	@Test

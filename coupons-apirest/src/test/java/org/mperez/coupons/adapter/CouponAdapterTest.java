@@ -1,5 +1,6 @@
 package org.mperez.coupons.adapter;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -64,6 +65,30 @@ public class CouponAdapterTest {
 		assertTrue(expected.getItemIds().get(1).equals(obtained.getItemIds().get(1)));
 		assertTrue(expected.getItemIds().get(2).equals(obtained.getItemIds().get(2)));
 		assertTrue(expected.getItemIds().get(3).equals(obtained.getItemIds().get(3)));
+	}
+	
+	@Test
+	public void adaptRequestNullShouldCreateModelEmptyObject() {
+		CouponRequest request = null;
+		Coupon model = couponRequestAdapter.adaptToModel(request);
+		assertTrue(model.getItemIds().isEmpty());
+		assertEquals(new Float(0), model.getAmount());
+	}
+	
+	@Test
+	public void adaptModelNullShouldCreateResponseEmptyObject() {
+		ItemsForCoupon itemsForCoupon = null;
+		CouponResponse response = couponResponseAdapter.adaptToView(itemsForCoupon);
+		assertNull(response.getItemIds());
+		assertNull(response.getTotal());
+	}
+	
+	@Test
+	public void adaptModelNullShouldCreateRequestEmptyObject() {
+		Coupon model = null;
+		CouponRequest request = couponRequestAdapter.adaptToView(model);
+		assertNull(request.getItemIds());
+		assertNull(request.getAmount());
 	}
 	
 	@Test
