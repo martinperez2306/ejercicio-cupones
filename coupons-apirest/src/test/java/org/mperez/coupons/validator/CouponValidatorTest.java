@@ -31,6 +31,12 @@ public class CouponValidatorTest {
 	}
 	
 	@Test
+	public void nullCouponShoulHaveErrors() {
+		List<ValidationError> errors = couponValidator.validate(null);
+		assertFalse(errors.isEmpty());
+	}
+	
+	@Test
 	public void couponWithoutItemsShoulHaveErrors() {
 		Coupon coupon = CouponsFactory.createCoupon(Arrays.asList(), 1000);
 		Coupon coupon2 = CouponsFactory.createCoupon(null, 1000);
@@ -46,5 +52,13 @@ public class CouponValidatorTest {
 		List<ValidationError> errors = couponValidator.validate(coupon);
 		assertFalse(errors.isEmpty());
 	}
+	
+	@Test
+	public void couponWithoutAmountNullHaveErrors() {
+		Coupon coupon = new Coupon(Arrays.asList("MLA1","MLA2","MLA3","MLA4","MLA5"), null);
+		List<ValidationError> errors = couponValidator.validate(coupon);
+		assertFalse(errors.isEmpty());
+	}
+
 
 }
