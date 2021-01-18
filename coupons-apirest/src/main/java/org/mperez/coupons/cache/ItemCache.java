@@ -14,10 +14,12 @@ public class ItemCache implements Cache<Item>, InitializingBean {
 
 	@Override
 	public String save(Item cacheable) {
-		if(cacheable != null) {
-			itemsMap.put(cacheable.getId(), cacheable);
+		String cacheableId = null;
+		if(cacheable != null && cacheable.getId() != null) {
+			cacheableId = cacheable.getId();
+			itemsMap.put(cacheableId, cacheable);
 		}
-		return cacheable.getId();
+		return cacheableId;
 	}
 
 	@Override
