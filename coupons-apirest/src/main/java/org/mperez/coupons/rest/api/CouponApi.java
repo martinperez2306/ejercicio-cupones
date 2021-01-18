@@ -26,6 +26,7 @@ public interface CouponApi {
         @ApiResponse(code = 200, message = "Equipo registrado exitosamente", response = CouponResponse.class),
         @ApiResponse(code = 400, message = "Solicitud invalida. Datos invalidos o incompletos.", response = Response.class),
         @ApiResponse(code = 404, message = "El monto no sea suficiente como para comprar mínimamente un item.", response = Response.class),
+        @ApiResponse(code = 412, message = "No se ha podido recuperar informacion de uno o mas items favoritos del Usuario.", response = Response.class),
         @ApiResponse(code = 500, message = "Error interno del servidor", response = Response.class) })
     @RequestMapping(value = "/coupon/",
         produces = { "application/json" }, 
