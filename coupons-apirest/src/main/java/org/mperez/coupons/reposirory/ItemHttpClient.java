@@ -6,6 +6,8 @@ import java.util.List;
 import org.mperez.coupons.adapter.ItemAdapter;
 import org.mperez.coupons.model.Item;
 import org.mperez.items.api.client.ItemApi;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Repository;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 @ConditionalOnProperty(value="repository.item", havingValue = "http")
 public class ItemHttpClient implements ItemRepository{
+	
+	private static final Logger logger = LoggerFactory.getLogger(ItemHttpClient.class);
 	
 	@Autowired
 	private ItemApi itemApi;
@@ -27,10 +31,11 @@ public class ItemHttpClient implements ItemRepository{
 
 	@Override
 	public Item findById(String itemId) {
+		logger.debug("Recuperando Item con ID [" + itemId + "]");
 		try {
 			return itemAdapter.adaptToModel(itemApi.getById(itemId));
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Ocurrio un error al recuperar la informacion del Item con ID [" + itemId + "]", e);
 		}
 		return null;
 	}

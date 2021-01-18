@@ -17,11 +17,15 @@ import org.mperez.coupons.model.ItemsForCoupon;
 import org.mperez.coupons.reposirory.ItemRepository;
 import org.mperez.coupons.validator.ValidationError;
 import org.mperez.coupons.validator.Validator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CouponDefaultService implements CouponService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(CouponDefaultService.class);
 	
 	@Autowired
 	private ItemsCalculation itemsCalculation;
@@ -37,9 +41,13 @@ public class CouponDefaultService implements CouponService {
 
 	@Override
 	public ItemsForCoupon getItemsForCoupon(Coupon coupon) {
+		logger.info("Entrando en Obtener Items Para Cupon");
+		logger.debug("Obteniendo Items recomendados para Cupon [" + coupon.toString() +"]");
 		List<ValidationError> errors = couponValidator.validate(coupon);
-		if(!errors.isEmpty()) 
+		if(!errors.isEmpty()) {
+			logger.error("Se ha solicitado items recomendados para un Cupon no valido");
 			throw new BadRequestException(errors.stream().map(e -> e.getDetail()).collect(Collectors.toList()));
+		}
 		Map<String, Float> itemMap = createItemMapFromCoupon(coupon);
 		List<String> itemIds = itemsCalculation.calculate(itemMap, coupon.getAmount());
 		return createItemsForCoupon(itemIds,coupon);
@@ -63,8 +71,10 @@ public class CouponDefaultService implements CouponService {
 	private Map<String, Float> createItemMapFromCoupon(Coupon coupon) {
 		Map<String, Float> itemMap = new HashMap<String, Float>();
 		List<Item> itemList = retrieveItems(coupon);
-		if(someItemWasNotFound(itemList, coupon))
+		if(someItemWasNotFound(itemList, coupon)) {
+			logger.error("No se ha podido recuperar uno o mas Items del Cupon [" + coupon.toString() + "]");
 			throw new PreconditionFailedException("No se ha podido recuperar uno o mas Items del Cupon");
+		}
 		for (Item item : itemList) {
 			itemMap.put(item.getId(), item.getAmount());
 		}
@@ -72,8 +82,10 @@ public class CouponDefaultService implements CouponService {
 	}
 	
 	private ItemsForCoupon createItemsForCoupon(List<String> itemIds, Coupon coupon) {
-		if(itemIds.isEmpty())
+		if(itemIds.isEmpty()) {
+			logger.error("El monto en el Cupon [" + coupon.toString() + "] no es suficiente como para comprar minimamente un item");
 			throw new NotFoundException("El monto no es suficiente como para comprar minimamente un item");
+		}
 		Float total = new Float(0);
 		for (String id : itemIds) {
 			Item item = itemRepository.findById(id);
