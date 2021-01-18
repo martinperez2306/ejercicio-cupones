@@ -30,3 +30,13 @@ Es posible editar algunas configuraciones de la API REST editando el archivo de 
 - REPOSITORIO DE ITEMS -> De forma predeterminada se consume el API de items para recuperar su informacion. Adicionalmente tambien puede configurarse un Mock en memoria con algunos datos dummy. Para esto se debe la propiedad ```repository.items``` o bien mediante la variable de entorno ```REPOSITORY_ITEMS```. Los valores posibles son **http** o **mem**.
 - ITEMS API URL -> En caso de utilizar el api de ITEMS debe proverse su URL. Por default ya está establecida.
 - CACHE ITEM -> La API de Cupones utiliza un cache para almacenar informacion temporalmente. Mediante la variable ```cache.items.clean.time``` o la variable de entorno ```CACHE_ITEMS_CLEAN_TIME``` se puede especificar la frecuencia con la que el cache se limpiara (en milisegundos).  De forma predeterminada su valor es de 10 minutos.
+
+## Cobertura de Codigo
+
+Se ha usado Jacoco para calcular la Cobertura de Codigo entre los distintos proyectos. 
+Esta configurado para que genere reportes de Coverage una vez ejecutado el script ```runTest.sh```. 
+
+Los archivos donde se encuentran los reportes para cada proyecto son 
+- **CUPONES** : coupons/target/site/jacoco/index.html
+- **CUPONES API REST** : coupons-apirest/target/site/jacoco/index.html
+- **ITEMS API CLIENT** : items-api-client/target/site/jacoco/index.html
