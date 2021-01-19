@@ -48,9 +48,9 @@ public class CouponDefaultService implements CouponService {
 			logger.error("Se ha solicitado items recomendados para un Cupon no valido");
 			throw new BadRequestException(errors.stream().map(e -> e.getDetail()).collect(Collectors.toList()));
 		}
-		Map<String, Float> itemMap = createItemMapFromCoupon(coupon);
-		List<String> itemIds = itemsCalculation.calculate(itemMap, coupon.getAmount());
-		return createItemsForCoupon(itemIds,coupon);
+		Map<String, Float> itemsMap = createItemMapFromCoupon(coupon);
+		List<String> itemIds = itemsCalculation.calculate(itemsMap, coupon.getAmount());
+		return createItemsForCoupon(itemIds, itemsMap, coupon);
 	}
 	
 	private List<Item> retrieveItems(Coupon coupon){
@@ -81,15 +81,15 @@ public class CouponDefaultService implements CouponService {
 		return itemMap;
 	}
 	
-	private ItemsForCoupon createItemsForCoupon(List<String> itemIds, Coupon coupon) {
+	private ItemsForCoupon createItemsForCoupon(List<String> itemIds, Map<String, Float> itemsMap, Coupon coupon) {
 		if(itemIds.isEmpty()) {
 			logger.error("El monto en el Cupon [" + coupon.toString() + "] no es suficiente como para comprar minimamente un item");
 			throw new NotFoundException("El monto no es suficiente como para comprar minimamente un item");
 		}
 		Float total = new Float(0);
 		for (String id : itemIds) {
-			Item item = itemRepository.findById(id);
-			total = total + item.getAmount();
+			Float itemAmount = itemsMap.get(id);
+			total = total + itemAmount;
 		}
 		return new ItemsForCoupon(itemIds, total, coupon);
 	}
